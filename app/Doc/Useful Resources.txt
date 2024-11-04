@@ -1,0 +1,2 @@
+git tuto :  https://www.atlassian.com/git/tutorials/setting-up-a-repository/git-clone
+delete branch (local or remote ) : https://stackoverflow.com/questions/2003505/how-do-i-delete-a-git-branch-locally-and-remotely
