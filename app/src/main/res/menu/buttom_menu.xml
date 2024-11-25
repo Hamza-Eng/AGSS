@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/home"
+        android:title="Home"
+        android:icon="@drawable/home_svgrepo_com"
+
+        />
+    <item
+        android:id="@+id/calendar"
+        android:title="Calendar"
+        android:icon="@drawable/calendar_check_svgrepo_com"
+
+        />
+    <item
+        android:id="@+id/fab"
+        android:title=""
+        android:enabled="false"
+
+        />
+
+    <item
+        android:id="@+id/search"
+        android:title="Search"
+        android:icon="@drawable/search_svgrepo_com"
+
+        />
+    <item
+        android:id="@+id/profile"
+        android:title="Profile"
+        android:icon="@drawable/profile_round_1342_svgrepo_com"
+
+        />
+
+
+</menu>
