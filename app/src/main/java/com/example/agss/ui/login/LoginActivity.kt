@@ -13,14 +13,11 @@ import com.example.agss.R
 import com.example.agss.Services.UserServices
 import com.example.agss.SignUpActivity
 import com.google.android.material.button.MaterialButton
-import java.lang.Exception
 
 class LoginActivity : AppCompatActivity() {
 
-    //Services
     private val userServices = UserServices()
 
-    // UI elements
     private lateinit var emailEditText: EditText
     private lateinit var passwordEditText: EditText
     private lateinit var rememberMeCheckBox: CheckBox
@@ -34,80 +31,102 @@ class LoginActivity : AppCompatActivity() {
         // Initialize UI components
         emailEditText = findViewById(R.id.email)
         passwordEditText = findViewById(R.id.password)
-//        rememberMeCheckBox = findViewById(R.id.remember_me)
+        rememberMeCheckBox = findViewById(R.id.remember_me)
         forgotPasswordTextView = findViewById(R.id.forgot_password)
         loginButton = findViewById(R.id.login)
+
+        // Check if user is already logged in
+        checkUserLogin()
 
         // Set up listeners
         setupListeners()
     }
 
+    private fun checkUserLogin() {
+        val sharedPreferences = getSharedPreferences("UserPreferences", MODE_PRIVATE)
+        val isLoggedIn = sharedPreferences.getBoolean("isLoggedIn", false)
+
+        if (isLoggedIn) {
+            val name = sharedPreferences.getString("name", null)
+            Toast.makeText(this, "Welcome back, $name!", Toast.LENGTH_SHORT).show()
+            val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
+            finish()
+        }
+    }
+
     private fun setupListeners() {
-        // Login button click listener
         loginButton.setOnClickListener {
             val email = emailEditText.text.toString()
             val password = passwordEditText.text.toString()
 
             if (validateInput(email, password)) {
-               handleLogin(email, password)
-
+                handleLogin(email, password)
             } else {
                 Toast.makeText(this, "Please fill in both fields", Toast.LENGTH_SHORT).show()
             }
         }
 
-        // Forgot password click listener
         forgotPasswordTextView.setOnClickListener {
-            // Navigate to ForgotPasswordActivity or handle password recovery
-//            Toast.makeText(this, "Forgot password clicked", Toast.LENGTH_SHORT).show()
             val intent = Intent(this, SignUpActivity::class.java)
-//           intent.putExtra("key", "value") if I want to apss some data to the next activity
             startActivity(intent)
         }
     }
 
     private fun validateInput(email: String, password: String): Boolean {
-        return email.isNotEmpty() && password.isNotEmpty()
+        if(!email.isNotEmpty() || !email.contains("@") || !email.contains(".")  ){
+
+            Toast.makeText(this, "Email format is Incorrect", Toast.LENGTH_SHORT).show()
+            return false
+        }
+            else if (password.isEmpty() || password.length < 8 ) {
+            Toast.makeText(this, "password format is Incorrect < 8 ", Toast.LENGTH_SHORT).show()
+            return false
+
+        }
+            else{
+
+            return true
+
+        }
+
     }
 
     private fun handleLogin(email: String, password: String) {
-        // Example authentication check (replace with real auth logic)
-
-            userServices.loginUser(email, password) { user ->
-                if (user != null) {
-                    // Login successful
-                    saveUserData(user)
-                    Toast.makeText(this, "Login successful! Welcome ${user.name}", Toast.LENGTH_SHORT).show()
+        userServices.loginUser(email, password) { user ->
+            if (user != null) {
+                val isSaved = saveUserData(user)
+                if (isSaved) {
+                    Toast.makeText(this, "Login successful! Welcome back, ${user.name}", Toast.LENGTH_SHORT).show()
                     val intent = Intent(this, MainActivity::class.java)
                     startActivity(intent)
-                    finish()  // Close LoginActivity
+                    finish()
+
+                } else {
+                    Toast.makeText(this, "Failed to save user data. Please try again.", Toast.LENGTH_SHORT).show()
                 }
-                else {
-                    // Login failed
-                    Toast.makeText(this, "Invalid email or password", Toast.LENGTH_SHORT).show()
-                }
+
+            } else {
+                Toast.makeText(this, "Invalid email or password", Toast.LENGTH_SHORT).show()
             }
-
-
-
-
-
-            // Navigate to MainActivity on successful login
-//            Toast.makeText(this, "Login successful", Toast.LENGTH_SHORT).show()
-//            val intent = Intent(this, MainActivity::class.java)
-//            startActivity(intent)
-//            finish()  // Close LoginActivity
-//        } else {
-//            Toast.makeText(this, "Invalid email or password", Toast.LENGTH_SHORT).show()
-//        }
+        }
     }
-    private fun saveUserData(user: User) {
-        val sharedPreferences = getSharedPreferences("UserPreferences", MODE_PRIVATE)
-        val editor = sharedPreferences.edit()
-        editor.putString("name", user.name)
-        editor.putString("email", user.email)
-        editor.putString("phone", user.phone)
-        editor.putBoolean("isLoggedIn", true)
-        editor.apply()
+
+
+    private fun saveUserData(user: User): Boolean {
+        return try {
+            val sharedPreferences = getSharedPreferences("UserPreferences", MODE_PRIVATE)
+            val editor = sharedPreferences.edit()
+            editor.putString("name", user.name)
+            editor.putString("email", user.email)
+            editor.putString("phone", user.phone)
+            editor.putBoolean("isLoggedIn", rememberMeCheckBox.isChecked)
+            editor.apply()
+            true
+        } catch (e: Exception) {
+            e.printStackTrace() // Log the exception for debugging
+            false
+        }
     }
+
 }

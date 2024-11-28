@@ -25,33 +25,35 @@ class UserServices {
 
 
     // Function to log in a user by email and password
-    fun loginUser(email: String, password: String, callback: (User?) -> Unit)  {
+    fun loginUser(email: String, password: String, callback: (User?) -> Unit) {
         val database = FirebaseDatabase.getInstance()
         val usersRef = database.getReference("users")
 
         // Querying the database by email
-        usersRef.orderByChild("email").equalTo(email).addListenerForSingleValueEvent(object : ValueEventListener {
-            override fun onDataChange(snapshot: DataSnapshot) {
-                if (snapshot.exists()) {
-                    for (userSnapshot in snapshot.children) {
-                        val user = userSnapshot.getValue(User::class.java)
-                        // Check if the password matches
-                        if (user != null && user.password == password) {
-                            callback(user)  // Return user if found
+        usersRef.orderByChild("email").equalTo(email)
+            .addListenerForSingleValueEvent(object : ValueEventListener {
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    var userFound: User? = null
 
+                    if (snapshot.exists()) {
+                        for (userSnapshot in snapshot.children) {
+                            val user = userSnapshot.getValue(User::class.java)
+                            // Check if the password matches
+                            if (user != null && user.password == password) {
+                                userFound = user
+                                break // Exit loop as we found the user
+                            }
                         }
                     }
-                    callback(null)  // Incorrect password
-                } else {
-                    callback(null)  // Email not found
 
+                    // Invoke callback with the result
+                    callback(userFound) // null if no matching user
                 }
-            }
 
-            override fun onCancelled(error: DatabaseError) {
-                callback(null)  // Database error
-            }
-        })
+                override fun onCancelled(error: DatabaseError) {
+                    callback(null) // Handle database errors gracefully
+                }
+            })
     }
 
 
