@@ -11,7 +11,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/my_primary"
-    android:alpha="0.4"/>
+    android:alpha="0.3"/>
 
 
     <LinearLayout
@@ -34,11 +34,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         app:cardCornerRadius="28dp"
-        android:layout_marginBottom="-10dp"
-
-
-
-        >
+        android:layout_marginBottom="-10dp">
 
         <LinearLayout
             android:layout_width="match_parent"
