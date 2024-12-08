@@ -1,0 +1,69 @@
+{
+  "project_info": {
+    "project_number": "48150437926",
+    "firebase_url": "https://sgss-e6b14-default-rtdb.europe-west1.firebasedatabase.app",
+    "project_id": "sgss-e6b14",
+    "storage_bucket": "sgss-e6b14.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:48150437926:android:3759944bd61aade93d46e7",
+        "android_client_info": {
+          "package_name": "com.example.admindashboardagss"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "48150437926-ltsto3adap0i4d8qsjsai12nsklvp6pa.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDsW4duisPYdp9T1KgcTcRlVMe98UytU8k"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "48150437926-ltsto3adap0i4d8qsjsai12nsklvp6pa.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:48150437926:android:fa0a446a6a4da1ad3d46e7",
+        "android_client_info": {
+          "package_name": "com.example.agss"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "48150437926-ltsto3adap0i4d8qsjsai12nsklvp6pa.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDsW4duisPYdp9T1KgcTcRlVMe98UytU8k"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "48150437926-ltsto3adap0i4d8qsjsai12nsklvp6pa.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

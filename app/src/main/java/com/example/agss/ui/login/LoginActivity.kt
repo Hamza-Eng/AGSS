@@ -117,6 +117,7 @@ class LoginActivity : AppCompatActivity() {
         return try {
             val sharedPreferences = getSharedPreferences("UserPreferences", MODE_PRIVATE)
             val editor = sharedPreferences.edit()
+            editor.putString("userId", user.id) // Save user ID
             editor.putString("name", user.name)
             editor.putString("email", user.email)
             editor.putString("phone", user.phone)

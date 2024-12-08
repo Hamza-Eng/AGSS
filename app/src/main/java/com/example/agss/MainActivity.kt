@@ -1,21 +1,12 @@
 package com.example.agss
 
 import android.os.Bundle
-import android.view.Menu
-import com.google.android.material.snackbar.Snackbar
-import com.google.android.material.navigation.NavigationView
-import androidx.navigation.findNavController
-import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.navigateUp
-import androidx.navigation.ui.setupActionBarWithNavController
-import androidx.navigation.ui.setupWithNavController
-import androidx.drawerlayout.widget.DrawerLayout
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.example.agss.Fragments.HomeFragment
 import com.example.agss.Fragments.SearcheFragment
-import com.example.agss.Fragments.profile_Fragment
 import com.example.agss.Fragments.CalendarFragment
+import com.example.agss.Fragments.ProfileFragment
 import com.example.agss.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
@@ -34,7 +25,7 @@ class MainActivity : AppCompatActivity() {
             when (item.itemId) {
                 R.id.home -> replaceFragment(HomeFragment())
                 R.id.search -> replaceFragment(SearcheFragment())
-                R.id.profile -> replaceFragment(profile_Fragment())
+                R.id.profile -> replaceFragment(ProfileFragment())
                 R.id.calendar -> replaceFragment(CalendarFragment())
             }
             true

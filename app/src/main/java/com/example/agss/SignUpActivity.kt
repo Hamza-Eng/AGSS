@@ -51,18 +51,39 @@ class SignUpActivity : AppCompatActivity() {
 
     private fun handleSignup(name: String, phone: String, email: String, password: String) {
         // Create a new User object
-        val newUser = User(name, phone, email, password)
+        //val newUser = User(name, phone, email, password)
+        val newUser = User(
+            name = name,      // Assign fullName to the name field
+            phone = phone,    // Assign phone to the phone field
+            email = email,    // Assign email to the email field
+            password = password // Assign password to the password field
+        )
+
 
         // Call UserServices to handle signup logic
-        val success = userServices.addUser(newUser)
+        userServices.addUser(newUser) { userId ->
+            if (userId != null) {
+                // Save the userId to SharedPreferences
+                val sharedPreferences = getSharedPreferences("UserPreferences", MODE_PRIVATE)
+                val editor = sharedPreferences.edit()
 
-        if (success==true) {
-            Toast.makeText(this, "Signup successful!", Toast.LENGTH_SHORT).show()
-            val intent = Intent(this, MainActivity::class.java)
-            startActivity(intent)
-            finish()  // Close LoginActivity
-        } else {
-            Toast.makeText(this, "Signup failed. Please try again.", Toast.LENGTH_SHORT).show()
+                // Save the userId and other necessary user details
+                editor.putString("userId", userId)
+                editor.putString("name", name)
+                editor.putString("email", email)
+                editor.putString("phone", phone)
+                editor.putBoolean("isLoggedIn", true)
+                editor.apply()
+
+                Toast.makeText(this, "Signup successful!", Toast.LENGTH_SHORT).show()
+
+                // Navigate to the MainActivity
+                val intent = Intent(this, MainActivity::class.java)
+                startActivity(intent)
+                finish()  // Close SignUpActivity
+            } else {
+                Toast.makeText(this, "Signup failed. Please try again.", Toast.LENGTH_SHORT).show()
+            }
         }
     }
 }
