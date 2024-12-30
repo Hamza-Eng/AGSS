@@ -1,27 +1,25 @@
 package com.example.agss.Fragments
 
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.EditText
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.agss.Adapters.ExplorerAdapter
 import com.example.agss.Entity.Terain
 import com.example.agss.R
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [SearcheFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class SearcheFragment : Fragment() {
+
+    private lateinit var searchInput: EditText
+    private lateinit var recyclerView: RecyclerView
+    private lateinit var explorerAdapter: ExplorerAdapter
+    private lateinit var itemList: List<Terain>
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -33,18 +31,38 @@ class SearcheFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val itemList =this.generateRandomTerainData()
-        // Initialize RecyclerView
-        val recyclerView = view.findViewById<RecyclerView>(R.id.recyclerView)
+
+        // Initialize component
+        recyclerView = view.findViewById(R.id.recyclerView)
+        searchInput = view.findViewById(R.id.search)
+
+        itemList = generateRandomTerainData()
 
         recyclerView.setHasFixedSize(true)
         recyclerView.setItemViewCacheSize(20)
 
         recyclerView.layoutManager = LinearLayoutManager(context)
-        recyclerView.adapter = ExplorerAdapter(itemList)
+        explorerAdapter = ExplorerAdapter(itemList)
+        recyclerView.adapter = explorerAdapter
+
+        // Set up the search input text change listener
+        searchInput.addTextChangedListener(object : TextWatcher {
+            override fun afterTextChanged(s: Editable?) {
+                filter(s.toString())
+            }
+
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
+        })
     }
 
-
+    private fun filter(text: String) {
+        val filteredList = itemList.filter {
+            it.name.contains(text, true) || it.description.contains(text, true) || it.adresse.contains(text, true)
+        }
+        explorerAdapter.updateList(filteredList)
+    }
 
     fun generateRandomTerainData(): List<Terain> {
         return listOf(
@@ -100,5 +118,4 @@ class SearcheFragment : Fragment() {
             )
         )
     }
-
 }

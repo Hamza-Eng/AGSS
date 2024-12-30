@@ -9,9 +9,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.agss.Entity.Terain
 import com.example.agss.R
 
-class ExplorerAdapter(private val Terains : List<Terain>) :  RecyclerView.Adapter<ExplorerAdapter.TerainViewHolder>(){
+class ExplorerAdapter(private var terains: List<Terain>) : RecyclerView.Adapter<ExplorerAdapter.TerainViewHolder>() {
 
-    class TerainViewHolder(Terain: View) : RecyclerView.ViewHolder(Terain){
+    class TerainViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val name: TextView = itemView.findViewById(R.id.name)
         val adresse: TextView = itemView.findViewById(R.id.adresse)
         val size: TextView = itemView.findViewById(R.id.size)
@@ -24,19 +24,20 @@ class ExplorerAdapter(private val Terains : List<Terain>) :  RecyclerView.Adapte
         return TerainViewHolder(view)
     }
 
-
-
     override fun onBindViewHolder(holder: TerainViewHolder, position: Int) {
-        val Terain=Terains.get(position)
-        holder.name.text=Terain.name
-        holder.size.text=Terain.size
-        holder.adresse.text=Terain.adresse
-        holder.price.text= Terain.price.toString()
-        holder.image.setImageResource(Terain.images as Int)
+        val terain = terains[position]
+        holder.name.text = terain.name
+        holder.size.text = terain.size
+        holder.adresse.text = terain.adresse
+        holder.price.text = terain.price.toString()
+        holder.image.setImageResource(terain.images as Int)
     }
 
+    override fun getItemCount(): Int = terains.size
 
-
-    override fun getItemCount(): Int =Terains.size
-
+    // Method to update the dataset
+    fun updateList(newList: List<Terain>) {
+        terains = newList
+        notifyDataSetChanged()
+    }
 }
