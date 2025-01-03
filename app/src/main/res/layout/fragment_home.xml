@@ -57,24 +57,26 @@
                android:layout_width="match_parent"
                android:layout_height="wrap_content"
                android:layout_gravity="center"
-               android:layout_marginBottom="9dp"
+               android:layout_marginBottom="4dp"
                android:orientation="horizontal">
 
                <androidx.constraintlayout.widget.ConstraintLayout
                    android:layout_width="205dp"
-                   android:layout_height="150dp">
+                   android:layout_height="130dp">
 
                    <ImageView
                        android:layout_width="100dp"
-                       android:layout_height="wrap_content"
+                       android:layout_height="match_parent"
                        android:src="@drawable/football"
-                       app:layout_constraintBottom_toBottomOf="parent"
                        app:layout_constraintEnd_toEndOf="parent"
 
+                       app:layout_constraintHorizontal_bias="0.495"
                        app:layout_constraintStart_toStartOf="parent"
-                       app:layout_constraintTop_toTopOf="parent" />
+                       app:layout_constraintTop_toTopOf="parent"
+                       app:layout_constraintVertical_bias="1.0" />
 
                    <TextView
+                       android:layout_marginTop="5dp"
                        android:layout_width="wrap_content"
                        android:layout_height="wrap_content"
                         android:textColor="@color/black"
@@ -90,19 +92,20 @@
                </androidx.constraintlayout.widget.ConstraintLayout>
                <androidx.constraintlayout.widget.ConstraintLayout
                    android:layout_width="205dp"
-                   android:layout_height="150dp">
+                   android:layout_height="130dp">
 
                    <ImageView
                        android:layout_width="100dp"
-                       android:layout_height="wrap_content"
+                       android:layout_height="match_parent"
                        android:src="@drawable/basketball"
-                       app:layout_constraintBottom_toBottomOf="parent"
                        app:layout_constraintEnd_toEndOf="parent"
 
                        app:layout_constraintStart_toStartOf="parent"
                        app:layout_constraintTop_toTopOf="parent" />
 
                    <TextView
+                       android:layout_marginTop="5dp"
+
                        android:layout_width="wrap_content"
                        android:layout_height="wrap_content"
                         android:textColor="@color/black"
@@ -122,25 +125,26 @@
          <LinearLayout
                        android:layout_width="match_parent"
                        android:layout_height="wrap_content"
-             android:layout_marginBottom="9dp"
+             android:layout_marginBottom="2dp"
              android:layout_gravity="center"
                        android:orientation="horizontal">
 
                        <androidx.constraintlayout.widget.ConstraintLayout
                            android:layout_width="205dp"
-                           android:layout_height="150dp">
+                           android:layout_height="130dp">
 
                            <ImageView
                                android:layout_width="100dp"
                                android:layout_height="wrap_content"
                                android:src="@drawable/tennis"
-                               app:layout_constraintBottom_toBottomOf="parent"
                                app:layout_constraintEnd_toEndOf="parent"
 
                                app:layout_constraintStart_toStartOf="parent"
                                app:layout_constraintTop_toTopOf="parent" />
 
                            <TextView
+                               android:layout_marginTop="5dp"
+
                                android:layout_width="wrap_content"
                                android:layout_height="wrap_content"
                                 android:textColor="@color/black"
@@ -156,7 +160,7 @@
                        </androidx.constraintlayout.widget.ConstraintLayout>
                        <androidx.constraintlayout.widget.ConstraintLayout
                            android:layout_width="205dp"
-                           android:layout_height="150dp">
+                           android:layout_height="130dp">
 
                            <ImageView
                                android:layout_width="100dp"
@@ -170,6 +174,7 @@
                            <TextView
                                android:layout_width="wrap_content"
                                android:layout_height="wrap_content"
+                               android:layout_marginTop="5dp"
                                 android:textColor="@color/black"
                                android:text="Basketball"
                                app:layout_constraintBottom_toBottomOf="parent"
@@ -184,7 +189,238 @@
 
 
                    </LinearLayout>
+<TextView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:textAppearance="?attr/textAppearanceCaption"
+    android:text="Recommended"/>
 
+           <!-- Horizontal Scroll Section -->
+           <HorizontalScrollView
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:layout_marginTop="15dp">
+
+               <LinearLayout
+                   android:orientation="horizontal"
+                   android:layout_width="wrap_content"
+                   android:layout_height="match_parent"
+                   android:gravity="center_horizontal">
+
+                   <!-- First Card -->
+                   <com.google.android.material.card.MaterialCardView
+                       app:cardCornerRadius="28dp"
+                       android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"
+                       android:layout_margin="8dp"
+                       app:cardElevation="8dp">
+
+                       <LinearLayout
+                           android:layout_width="350dp"
+                           android:layout_height="wrap_content"
+                           android:orientation="vertical"
+                           android:padding="16dp">
+
+                           <androidx.cardview.widget.CardView
+                               android:layout_width="match_parent"
+                               android:layout_height="match_parent"
+                               app:cardCornerRadius="15dp"
+                               android:layout_margin="5dp"
+                               android:elevation="10dp">
+                               <ImageView
+
+                                   android:layout_width="match_parent"
+                                   android:layout_height="194dp"
+                                   app:srcCompat="@drawable/main_background"
+                                   android:scaleType="centerCrop"
+                                   android:contentDescription="content_description_media" />
+
+                           </androidx.cardview.widget.CardView>
+
+
+                           <TextView
+                               android:layout_width="wrap_content"
+                               android:layout_height="wrap_content"
+                               android:text="Text"
+                               android:textAppearance="?attr/textAppearanceHeadline6"
+                               android:layout_marginTop="8dp" />
+
+                           <TextView
+                               android:layout_width="wrap_content"
+                               android:layout_height="wrap_content"
+                               android:text="Details about the event"
+                               android:textAppearance="?attr/textAppearanceBody2"
+                               android:layout_marginTop="4dp" />
+
+                           <com.google.android.material.button.MaterialButton
+                               android:layout_width="match_parent"
+                               android:layout_height="wrap_content"
+                               android:text="Take a look"
+                               android:layout_marginTop="8dp" />
+                       </LinearLayout>
+                   </com.google.android.material.card.MaterialCardView>
+
+                   <!-- Second Card -->
+                   <com.google.android.material.card.MaterialCardView
+                       app:cardCornerRadius="28dp"
+                       android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"
+                       android:layout_margin="8dp"
+                       app:cardElevation="8dp">
+
+                       <LinearLayout
+                           android:layout_width="350dp"
+                           android:layout_height="wrap_content"
+                           android:orientation="vertical"
+                           android:padding="16dp">
+
+                           <androidx.cardview.widget.CardView
+                               android:layout_width="match_parent"
+                               android:layout_height="match_parent"
+                               app:cardCornerRadius="15dp"
+                               android:layout_margin="5dp"
+                               android:elevation="10dp">
+                               <ImageView
+
+                                   android:layout_width="match_parent"
+                                   android:layout_height="194dp"
+                                   app:srcCompat="@drawable/main_background"
+                                   android:scaleType="centerCrop"
+                                   android:contentDescription="content_description_media" />
+
+                           </androidx.cardview.widget.CardView>
+
+
+                           <TextView
+                               android:layout_width="wrap_content"
+                               android:layout_height="wrap_content"
+                               android:text="Text"
+                               android:textAppearance="?attr/textAppearanceHeadline6"
+                               android:layout_marginTop="8dp" />
+
+                           <TextView
+                               android:layout_width="wrap_content"
+                               android:layout_height="wrap_content"
+                               android:text="Details about the event"
+                               android:textAppearance="?attr/textAppearanceBody2"
+                               android:layout_marginTop="4dp" />
+
+                           <com.google.android.material.button.MaterialButton
+                               android:layout_width="match_parent"
+                               android:layout_height="wrap_content"
+                               android:text="Take a look"
+                               android:layout_marginTop="8dp" />
+                       </LinearLayout>
+                   </com.google.android.material.card.MaterialCardView>
+
+                   <!-- Third Card -->
+                   <com.google.android.material.card.MaterialCardView
+                       app:cardCornerRadius="28dp"
+                       android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"
+                       android:layout_margin="8dp"
+                       app:cardElevation="8dp">
+
+                       <LinearLayout
+                           android:layout_width="350dp"
+                           android:layout_height="wrap_content"
+                           android:orientation="vertical"
+                           android:padding="16dp">
+
+                           <androidx.cardview.widget.CardView
+                               android:layout_width="match_parent"
+                               android:layout_height="match_parent"
+                               app:cardCornerRadius="15dp"
+                               android:layout_margin="5dp"
+                               android:elevation="10dp">
+                               <ImageView
+
+                                   android:layout_width="match_parent"
+                                   android:layout_height="194dp"
+                                   app:srcCompat="@drawable/main_background"
+                                   android:scaleType="centerCrop"
+                                   android:contentDescription="content_description_media" />
+
+                           </androidx.cardview.widget.CardView>
+
+
+                           <TextView
+                               android:layout_width="wrap_content"
+                               android:layout_height="wrap_content"
+                               android:text="Text"
+                               android:textAppearance="?attr/textAppearanceHeadline6"
+                               android:layout_marginTop="8dp" />
+
+                           <TextView
+                               android:layout_width="wrap_content"
+                               android:layout_height="wrap_content"
+                               android:text="Details about the event"
+                               android:textAppearance="?attr/textAppearanceBody2"
+                               android:layout_marginTop="4dp" />
+
+                           <com.google.android.material.button.MaterialButton
+                               android:layout_width="match_parent"
+                               android:layout_height="wrap_content"
+                               android:text="Take a look"
+                               android:layout_marginTop="8dp" />
+                       </LinearLayout>
+                   </com.google.android.material.card.MaterialCardView>
+
+                   <!-- Fourth Card -->
+                   <com.google.android.material.card.MaterialCardView
+                       app:cardCornerRadius="28dp"
+                       android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"
+                       android:layout_margin="8dp"
+                       app:cardElevation="8dp">
+
+                       <LinearLayout
+                           android:layout_width="350dp"
+                           android:layout_height="wrap_content"
+                           android:orientation="vertical"
+                           android:padding="16dp">
+
+                           <androidx.cardview.widget.CardView
+                               android:layout_width="match_parent"
+                               android:layout_height="match_parent"
+                               app:cardCornerRadius="15dp"
+                               android:layout_margin="5dp"
+                               android:elevation="10dp">
+                               <ImageView
+
+                                   android:layout_width="match_parent"
+                                   android:layout_height="194dp"
+                                   app:srcCompat="@drawable/main_background"
+                                   android:scaleType="centerCrop"
+                                   android:contentDescription="content_description_media" />
+
+                           </androidx.cardview.widget.CardView>
+
+
+                           <TextView
+                               android:layout_width="wrap_content"
+                               android:layout_height="wrap_content"
+                               android:text="Text"
+                               android:textAppearance="?attr/textAppearanceHeadline6"
+                               android:layout_marginTop="8dp" />
+
+                           <TextView
+                               android:layout_width="wrap_content"
+                               android:layout_height="wrap_content"
+                               android:text="Details about the event"
+                               android:textAppearance="?attr/textAppearanceBody2"
+                               android:layout_marginTop="4dp" />
+
+                           <com.google.android.material.button.MaterialButton
+                               android:layout_width="match_parent"
+                               android:layout_height="wrap_content"
+                               android:text="Take a look"
+                               android:layout_marginTop="8dp" />
+                       </LinearLayout>
+                   </com.google.android.material.card.MaterialCardView>
+
+               </LinearLayout>
+           </HorizontalScrollView>
 
        </LinearLayout>
 
