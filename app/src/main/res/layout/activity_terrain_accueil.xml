@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".TerrainAccueil">
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="6dp">
+
+            <!-- Image Header -->
+            <ImageView
+                android:id="@+id/sports_image"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/pexels_markusspiske" />
+
+            <!-- Title and Location -->
+            <TextView
+                android:id="@+id/title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="Bernabeu Stadium"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                android:gravity="center" />
+
+            <TextView
+                android:id="@+id/location"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Casablanca, Maroc"
+                android:textSize="16sp"
+                android:gravity="center"
+                android:layout_marginBottom="16dp" />
+
+            <!-- TabLayout -->
+            <com.google.android.material.tabs.TabLayout
+                android:id="@+id/tabLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:tabMode="fixed"
+                app:tabGravity="fill">
+
+                <com.google.android.material.tabs.TabItem
+                    android:text="Accueil"
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"/>
+                <com.google.android.material.tabs.TabItem
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:text="Réserver" />
+            </com.google.android.material.tabs.TabLayout>
+
+            <!-- Sport Section -->
+            <TextView
+                android:id="@+id/sport_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Votre Sport"
+                android:textSize="18sp"
+                android:layout_marginTop="16dp" />
+
+            <!--            <LinearLayout-->
+            <!--                android:orientation="horizontal"-->
+            <!--                android:layout_width="wrap_content"-->
+            <!--                android:layout_height="wrap_content"-->
+            <!--                android:layout_gravity="center"-->
+            <!--                android:padding="8dp">-->
+
+            <!--                <ImageView-->
+            <!--                    android:id="@+id/sport_icon"-->
+            <!--                    android:layout_width="48dp"-->
+            <!--                    android:layout_height="48dp"-->
+            <!--                    android:src="@drawable/padel_icon"-->
+            <!--                    android:background="@drawable/circle_background"-->
+            <!--                    android:padding="8dp" />-->
+
+            <!--                <TextView-->
+            <!--                    android:id="@+id/sport_name"-->
+            <!--                    android:layout_width="wrap_content"-->
+            <!--                    android:layout_height="wrap_content"-->
+            <!--                    android:text="Padel"-->
+            <!--                    android:textSize="16sp"-->
+            <!--                    android:layout_marginStart="8dp"-->
+            <!--                    android:gravity="center_vertical" />-->
+            <!--            </LinearLayout>-->
+
+            <!-- Date Picker -->
+            <TextView
+                android:id="@+id/date_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Date souhaitée"
+                android:textSize="18sp"
+                android:layout_marginTop="16dp" />
+
+            <HorizontalScrollView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <!-- Repeat for all days -->
+                    <LinearLayout
+                        android:orientation="vertical"
+                        android:layout_width="64dp"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:padding="8dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="JEU"
+                            android:textSize="14sp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="16"
+                            android:textSize="20sp"
+                            android:textStyle="bold"
+                            android:layout_marginTop="4dp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="mar"
+                            android:textSize="14sp" />
+
+                    </LinearLayout>
+                </LinearLayout>
+            </HorizontalScrollView>
+
+
+
+
+
+
+        </LinearLayout>
+    </ScrollView>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
