@@ -40,6 +40,7 @@ android {
 }
 
 dependencies {
+    implementation("org.osmdroid:osmdroid-android:6.1.16")
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
