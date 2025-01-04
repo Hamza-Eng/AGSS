@@ -1,5 +1,6 @@
 package com.example.agss.Fragments
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -10,35 +11,33 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.agss.R
-import com.example.agss.adapters.SearchResultAdapter
+import com.example.agss.TerrainAccueil
+import com.example.agss.adapters.SearchAdapter
 import com.example.agss.models.SearchResult
 
 class SearcheFragment : Fragment() {
     private lateinit var searchEditText: EditText
     private lateinit var recyclerView: RecyclerView
     private lateinit var emptyStateView: View
-    private lateinit var searchAdapter: SearchResultAdapter
+    private lateinit var searchAdapter: SearchAdapter
 
     // Sample data
     private val allResults = listOf(
         SearchResult(
             "Bernabeu Stadium",
             "Madrid, Spain",
-            "Football",
             "$200/hour",
             R.drawable.main_background
         ),
         SearchResult(
             "Camp Nou",
             "Barcelona, Spain",
-            "Football",
             "$180/hour",
             R.drawable.main_background
         ),
         SearchResult(
             "Allianz Arena",
             "Munich, Germany",
-            "Football",
             "$150/hour",
             R.drawable.main_background
         )
@@ -60,15 +59,7 @@ class SearcheFragment : Fragment() {
         recyclerView = view.findViewById(R.id.searchRecyclerView)
         emptyStateView = view.findViewById(R.id.emptyStateView)
 
-        // Setup RecyclerView
-        searchAdapter = SearchResultAdapter()
-        recyclerView.apply {
-            layoutManager = LinearLayoutManager(context).apply {
-                orientation = LinearLayoutManager.VERTICAL
-            }
-            adapter = searchAdapter
-            setHasFixedSize(true) // Improves performance
-        }
+        setupRecyclerView()
 
         // Setup search listener
         searchEditText.addTextChangedListener { text ->
@@ -77,6 +68,24 @@ class SearcheFragment : Fragment() {
 
         // Show initial results
         searchAdapter.updateResults(allResults)
+    }
+
+    private fun setupRecyclerView() {
+        recyclerView.layoutManager = LinearLayoutManager(context)
+        
+        // Initialize adapter with click listener
+        searchAdapter = SearchAdapter(allResults) { searchResult ->
+            // Handle click - navigate to TerrainAccueil
+            val intent = Intent(context, TerrainAccueil::class.java).apply {
+                putExtra("stadium_name", searchResult.name)
+                putExtra("stadium_location", searchResult.location)
+                putExtra("stadium_price", searchResult.price)
+                putExtra("stadium_image", searchResult.imageResId)
+            }
+            startActivity(intent)
+        }
+        
+        recyclerView.adapter = searchAdapter
     }
 
     private fun filterResults(query: String) {

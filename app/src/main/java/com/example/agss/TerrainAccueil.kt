@@ -16,6 +16,14 @@ class TerrainAccueil : AppCompatActivity() {
         binding = ActivityTerrainAccueilBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        // Get data from intent and update UI
+        intent.extras?.let { bundle ->
+            binding.title.text = bundle.getString("stadium_name", "")
+            binding.location.text = bundle.getString("stadium_location", "")
+            binding.price.text = bundle.getString("stadium_price", "")
+            binding.sportsImage.setImageResource(bundle.getInt("stadium_image"))
+        }
+
         // Setup toolbar
         setSupportActionBar(binding.toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
