@@ -13,6 +13,8 @@ import com.example.agss.adapters.CategoryAdapter
 import com.example.agss.adapters.StadiumAdapter
 import com.example.agss.models.Category
 import com.example.agss.models.Stadium
+import android.content.Intent
+import com.example.agss.TerrainAccueil
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -86,6 +88,16 @@ class HomeFragment : Fragment() {
             )
         )
 
-        stadiumsRecyclerView.adapter = StadiumAdapter(stadiums)
+        stadiumsRecyclerView.adapter = StadiumAdapter(stadiums) { stadium ->
+            // Navigate to TerrainAccueil
+            val intent = Intent(context, TerrainAccueil::class.java).apply {
+//                putExtra("stadium_id", stadium.)
+                putExtra("stadium_name", stadium.name)
+                putExtra("stadium_location", stadium.location)
+                putExtra("stadium_price", stadium.price)
+                putExtra("stadium_image", stadium.imageResId)
+            }
+            startActivity(intent)
+        }
     }
 }

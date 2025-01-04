@@ -9,10 +9,20 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.agss.R
 import com.example.agss.models.Stadium
 
-class StadiumAdapter(private val stadiums: List<Stadium>) :
-    RecyclerView.Adapter<StadiumAdapter.StadiumViewHolder>() {
+class StadiumAdapter(
+    private val stadiums: List<Stadium>,
+    private val onStadiumClick: (Stadium) -> Unit
+) : RecyclerView.Adapter<StadiumAdapter.StadiumViewHolder>() {
 
-    class StadiumViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+    inner class StadiumViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+        init {
+            itemView.setOnClickListener {
+                val position = adapterPosition
+                if (position != RecyclerView.NO_POSITION) {
+                    onStadiumClick(stadiums[position])
+                }
+            }
+        }
         val image: ImageView = view.findViewById(R.id.stadiumImage)
         val name: TextView = view.findViewById(R.id.stadiumName)
         val location: TextView = view.findViewById(R.id.stadiumLocation)
