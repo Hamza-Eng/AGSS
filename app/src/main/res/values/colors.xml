@@ -12,4 +12,7 @@
 
     <color name="my_primary">#5e548e</color>
     <color name="my_secondary">@color/white</color>
+
+    <color name="unavailable_slot">#CCCCCC</color>
+    <color name="selected_slot">#4CAF50</color>
 </resources>

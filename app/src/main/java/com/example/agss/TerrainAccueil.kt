@@ -1,5 +1,6 @@
 package com.example.agss
 
+import android.content.Intent
 import android.os.Bundle
 import android.preference.PreferenceManager
 import androidx.appcompat.app.AppCompatActivity
@@ -22,6 +23,9 @@ class TerrainAccueil : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityTerrainAccueilBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        // Initialize osmdroid configuration
+        Configuration.getInstance().load(this, PreferenceManager.getDefaultSharedPreferences(this))
 
         // Get data from intent and update UI
         intent.extras?.let { bundle ->
@@ -49,18 +53,18 @@ class TerrainAccueil : AppCompatActivity() {
 
         // Handle booking button click
         binding.fabBook.setOnClickListener {
-            // Navigate to booking tab
-            binding.viewPager.currentItem = 1
+            // Create intent to start BookingActivity
+            val intent = Intent(this, BookingActivity::class.java).apply {
+                // Pass any necessary data to BookingActivity
+                putExtra("stadium_name", binding.title.text)
+                putExtra("stadium_location", binding.location.text)
+                putExtra("stadium_price", binding.price.text)
+            }
+            startActivity(intent)
         }
 
-
-        // Initialize osmdroid configuration
-        Configuration.getInstance().load(this, PreferenceManager.getDefaultSharedPreferences(this))
-
-        setContentView(R.layout.activity_terrain_accueil)
-
         // Initialize map
-        map = findViewById(R.id.mapView)
+        map = binding.mapView // Use binding to get mapView
         map.setMultiTouchControls(true)
 
         val mapController = map.controller

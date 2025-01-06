@@ -47,6 +47,9 @@
             </intent-filter>
             -->
         </activity>
+        <activity
+            android:name=".BookingActivity"
+            android:exported="false" />
     </application>
 
 </manifest>
