@@ -43,7 +43,7 @@ class HomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         
         setupCategoriesRecyclerView(view)
-        setupStadiumsRecyclerView(view)
+        setupStadiumsList(view)
     }
 
     private fun setupCategoriesRecyclerView(view: View) {
@@ -61,41 +61,56 @@ class HomeFragment : Fragment() {
         categoriesRecyclerView.adapter = CategoryAdapter(categories)
     }
 
-    private fun setupStadiumsRecyclerView(view: View) {
-        stadiumsRecyclerView = view.findViewById(R.id.stadiumsRecyclerView)
-        stadiumsRecyclerView.layoutManager = 
-            LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+    private fun setupStadiumsList(view: View) {
+        val stadiumsRecyclerView = view.findViewById<RecyclerView>(R.id.stadiumsRecyclerView)
+        stadiumsRecyclerView.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
 
-        // Sample stadiums data
+        // Create list of stadiums with real data
         val stadiums = listOf(
+
             Stadium(
-                "Bernabeu Stadium",
-                "Madrid, Spain",
-                "$200/hour",
-                R.drawable.main_background
+                id = "1",
+                name = "Camp Nou",
+                location = "Barcelona, Spain",
+                price = "$90/hour",
+                imageResId = R.drawable.pexels_pixabay,
+                description = "Europe's largest stadium, home to FC Barcelona",
+                latitude = 41.3809,
+                longitude = 2.1228
             ),
             Stadium(
-                "Camp Nou",
-                "Barcelona, Spain",
-                "$180/hour",
-                R.drawable.main_background
+                id = "2",
+                name = "Bernabeu Stadium",
+                location = "Madrid, Spain",
+                price = "$100/hour",
+                imageResId = R.drawable.pexels_grizzlybear,
+                description = "Home of Real Madrid, this iconic stadium offers world-class facilities",
+                latitude = 40.4530,
+                longitude = -3.6883
             ),
             Stadium(
-                "Allianz Arena",
-                "Munich, Germany",
-                "$150/hour",
-                R.drawable.main_background
-            )
+                id = "3",
+                name = "Bernabeu Stadium",
+                location = "Madrid, Spain",
+                price = "$100/hour",
+                imageResId = R.drawable.pexels_mike_468229_1171084,
+                description = "Home of Real Madrid, this iconic stadium offers world-class facilities",
+                latitude = 40.4530,
+                longitude = -3.6883
+            ),
+
         )
 
         stadiumsRecyclerView.adapter = StadiumAdapter(stadiums) { stadium ->
-            // Navigate to TerrainAccueil
             val intent = Intent(context, TerrainAccueil::class.java).apply {
-//                putExtra("stadium_id", stadium.)
+                putExtra("stadium_id", stadium.id)
                 putExtra("stadium_name", stadium.name)
                 putExtra("stadium_location", stadium.location)
                 putExtra("stadium_price", stadium.price)
                 putExtra("stadium_image", stadium.imageResId)
+                putExtra("stadium_description", stadium.description)
+                putExtra("stadium_latitude", stadium.latitude)
+                putExtra("stadium_longitude", stadium.longitude)
             }
             startActivity(intent)
         }

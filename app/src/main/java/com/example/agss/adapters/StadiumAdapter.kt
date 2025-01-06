@@ -11,22 +11,25 @@ import com.example.agss.models.Stadium
 
 class StadiumAdapter(
     private val stadiums: List<Stadium>,
-    private val onStadiumClick: (Stadium) -> Unit
+    private val onStadiumClicked: (Stadium) -> Unit
 ) : RecyclerView.Adapter<StadiumAdapter.StadiumViewHolder>() {
 
-    inner class StadiumViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        init {
+    inner class StadiumViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        private val nameTextView: TextView = itemView.findViewById(R.id.stadiumName)
+        private val locationTextView: TextView = itemView.findViewById(R.id.stadiumLocation)
+        private val priceTextView: TextView = itemView.findViewById(R.id.stadiumPrice)
+        private val imageView: ImageView = itemView.findViewById(R.id.stadiumImage)
+
+        fun bind(stadium: Stadium) {
+            nameTextView.text = stadium.name
+            locationTextView.text = stadium.location
+            priceTextView.text = stadium.price
+            imageView.setImageResource(stadium.imageResId)
+
             itemView.setOnClickListener {
-                val position = adapterPosition
-                if (position != RecyclerView.NO_POSITION) {
-                    onStadiumClick(stadiums[position])
-                }
+                onStadiumClicked(stadium)
             }
         }
-        val image: ImageView = view.findViewById(R.id.stadiumImage)
-        val name: TextView = view.findViewById(R.id.stadiumName)
-        val location: TextView = view.findViewById(R.id.stadiumLocation)
-        val price: TextView = view.findViewById(R.id.stadiumPrice)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): StadiumViewHolder {
@@ -36,11 +39,7 @@ class StadiumAdapter(
     }
 
     override fun onBindViewHolder(holder: StadiumViewHolder, position: Int) {
-        val stadium = stadiums[position]
-        holder.image.setImageResource(stadium.imageResId)
-        holder.name.text = stadium.name
-        holder.location.text = stadium.location
-        holder.price.text = stadium.price
+        holder.bind(stadiums[position])
     }
 
     override fun getItemCount() = stadiums.size

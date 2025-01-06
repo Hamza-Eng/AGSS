@@ -29,10 +29,34 @@ class TerrainAccueil : AppCompatActivity() {
 
         // Get data from intent and update UI
         intent.extras?.let { bundle ->
+            // Update title and basic info
             binding.title.text = bundle.getString("stadium_name", "")
             binding.location.text = bundle.getString("stadium_location", "")
             binding.price.text = bundle.getString("stadium_price", "")
             binding.sportsImage.setImageResource(bundle.getInt("stadium_image"))
+            binding.description.text = bundle.getString("stadium_description", "")
+
+            // Update map location
+            val latitude = bundle.getDouble("stadium_latitude", 0.0)
+            val longitude = bundle.getDouble("stadium_longitude", 0.0)
+            
+            // Initialize map
+            map = binding.mapView
+            map.setMultiTouchControls(true)
+
+            val mapController = map.controller
+            mapController.setZoom(15.0)
+
+            // Set the center point to the stadium's location
+            val stadiumLocation = GeoPoint(latitude, longitude)
+            mapController.setCenter(stadiumLocation)
+
+            // Add a marker for the stadium
+            val marker = Marker(map)
+            marker.position = stadiumLocation
+            marker.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM)
+            marker.title = bundle.getString("stadium_name", "")
+            map.overlays.add(marker)
         }
 
         // Setup toolbar
@@ -62,24 +86,6 @@ class TerrainAccueil : AppCompatActivity() {
             }
             startActivity(intent)
         }
-
-        // Initialize map
-        map = binding.mapView // Use binding to get mapView
-        map.setMultiTouchControls(true)
-
-        val mapController = map.controller
-        mapController.setZoom(15.0)
-
-        // Set the center point (example coordinates for Casablanca)
-        val startPoint = GeoPoint(33.5731, -7.5898)
-        mapController.setCenter(startPoint)
-
-        // Add a marker
-        val marker = Marker(map)
-        marker.position = startPoint
-        marker.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM)
-        marker.title = "Bernabeu Stadium"
-        map.overlays.add(marker)
     }
 
     override fun onResume() {
