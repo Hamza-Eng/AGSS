@@ -11,6 +11,8 @@ import com.example.agss.R
 import com.example.agss.adapters.ReservationAdapter
 import com.example.agss.models.Reservation
 import android.content.Context
+import com.google.android.material.button.MaterialButton
+import androidx.navigation.fragment.findNavController
 
 class CalendarFragment : Fragment() {
     
@@ -58,5 +60,11 @@ class CalendarFragment : Fragment() {
 
         // Set adapter
         reservationsRecyclerView.adapter = ReservationAdapter(reservations)
+
+        // Setup book now button
+        view.findViewById<MaterialButton>(R.id.bookNowButton).setOnClickListener {
+            // Navigate to booking screen
+            //findNavController().navigate(R.id.action_calendarFragment_to_bookingFragment)
+        }
     }
 }

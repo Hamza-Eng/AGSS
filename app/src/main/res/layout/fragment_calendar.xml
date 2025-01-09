@@ -6,15 +6,17 @@
     android:layout_height="match_parent"
     android:background="@color/white">
 
-    <!-- Header Section -->
+    <!-- Enhanced Header Section -->
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:background="@android:color/transparent"
+        app:elevation="0dp">
 
         <com.google.android.material.appbar.CollapsingToolbarLayout
             android:layout_width="match_parent"
-            android:layout_height="180dp"
-            app:layout_scrollFlags="scroll|exitUntilCollapsed"
+            android:layout_height="200dp"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed|snap"
             app:contentScrim="@color/my_primary">
 
             <LinearLayout
@@ -22,12 +24,12 @@
                 android:layout_height="match_parent"
                 android:orientation="vertical"
                 android:gravity="center"
-                android:background="@color/my_primary"
-                android:padding="16dp">
+                android:background="@drawable/header_gradient"
+                android:padding="24dp">
 
                 <ImageView
-                    android:layout_width="64dp"
-                    android:layout_height="64dp"
+                    android:layout_width="72dp"
+                    android:layout_height="72dp"
                     android:src="@drawable/calendar_check_svgrepo_com"
                     app:tint="@color/white"/>
 
@@ -36,55 +38,92 @@
                     android:layout_height="wrap_content"
                     android:text="My Reservations"
                     android:textColor="@color/white"
-                    android:textSize="24sp"
+                    android:textSize="28sp"
                     android:textStyle="bold"
                     android:layout_marginTop="16dp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="View and manage your bookings"
+                    android:textColor="@color/white"
+                    android:alpha="0.9"
+                    android:textSize="16sp"
+                    android:layout_marginTop="8dp"/>
 
             </LinearLayout>
         </com.google.android.material.appbar.CollapsingToolbarLayout>
     </com.google.android.material.appbar.AppBarLayout>
 
-    <!-- Empty State -->
-    <LinearLayout
-        android:id="@+id/emptyStateLayout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:gravity="center"
-        android:visibility="gone"
-        android:layout_gravity="center"
-        android:layout_marginTop="32dp">
-
-        <ImageView
-            android:layout_width="120dp"
-            android:layout_height="120dp"
-            android:src="@drawable/calendar_check_svgrepo_com"
-            android:alpha="0.5"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="No Reservations Yet"
-            android:textSize="20sp"
-            android:textStyle="bold"
-            android:layout_marginTop="16dp"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Your upcoming reservations will appear here"
-            android:textSize="16sp"
-            android:alpha="0.7"
-            android:layout_marginTop="8dp"/>
-    </LinearLayout>
-
-    <!-- Reservations List -->
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/reservationsRecyclerView"
+    <!-- Main Content -->
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:padding="16dp"
-        android:clipToPadding="false"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <!-- Empty State with Modern Design -->
+            <LinearLayout
+                android:id="@+id/emptyStateLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:visibility="gone"
+                android:padding="32dp"
+                android:layout_marginTop="32dp">
+
+                <ImageView
+                    android:layout_width="150dp"
+                    android:layout_height="150dp"
+                    android:src="@drawable/calendar_check_svgrepo_com"
+                    android:alpha="0.6"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="No Reservations Yet"
+                    android:textSize="24sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/my_primary"
+                    android:layout_marginTop="24dp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Your upcoming reservations will appear here"
+                    android:textSize="16sp"
+                    android:textAlignment="center"
+                    android:alpha="0.7"
+                    android:layout_marginTop="8dp"/>
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/bookNowButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Book Now"
+                    android:textAllCaps="false"
+                    android:layout_marginTop="24dp"
+                    app:cornerRadius="24dp"
+                    android:paddingHorizontal="32dp"
+                    android:paddingVertical="12dp"/>
+            </LinearLayout>
+
+            <!-- Reservations List with Enhanced Styling -->
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/reservationsRecyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:clipToPadding="false"
+                android:paddingTop="8dp"
+                android:paddingBottom="16dp"/>
+
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
