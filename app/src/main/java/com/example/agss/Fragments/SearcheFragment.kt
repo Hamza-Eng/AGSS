@@ -21,25 +21,37 @@ class SearcheFragment : Fragment() {
     private lateinit var emptyStateView: View
     private lateinit var searchAdapter: SearchAdapter
 
-    // Sample data
+    // Updated sample data to match HomeFragment stadiums
     private val allResults = listOf(
         SearchResult(
-            "Bernabeu Stadium",
-            "Madrid, Spain",
-            "$200/hour",
-            R.drawable.main_background
+            id = "1",
+            name = "Camp Nou",
+            location = "Barcelona, Spain",
+            price = "$150/hour",
+            imageResId = R.drawable.pexels_pixabay,
+            description = "Home of FC Barcelona, this legendary stadium offers an unforgettable experience",
+            latitude = 41.3809,
+            longitude = 2.1228
         ),
         SearchResult(
-            "Camp Nou",
-            "Barcelona, Spain",
-            "$180/hour",
-            R.drawable.main_background
+            id = "2",
+            name = "Bernabeu Stadium",
+            location = "Madrid, Spain",
+            price = "$100/hour",
+            imageResId = R.drawable.pexels_grizzlybear,
+            description = "Home of Real Madrid, this iconic stadium offers world-class facilities",
+            latitude = 40.4530,
+            longitude = -3.6883
         ),
         SearchResult(
-            "Allianz Arena",
-            "Munich, Germany",
-            "$150/hour",
-            R.drawable.main_background
+            id = "3",
+            name = "Bernabeu Stadium",
+            location = "Madrid, Spain",
+            price = "$100/hour",
+            imageResId = R.drawable.pexels_mike_468229_1171084,
+            description = "Home of Real Madrid, this iconic stadium offers world-class facilities",
+            latitude = 40.4530,
+            longitude = -3.6883
         )
     )
 
