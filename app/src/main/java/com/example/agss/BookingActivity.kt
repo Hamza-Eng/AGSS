@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.example.agss.adapters.TimeSlotAdapter
 import com.example.agss.databinding.ActivityBookingBinding
 import com.example.agss.models.TimeSlot
+import com.example.agss.models.Reservation
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -15,11 +16,17 @@ class BookingActivity : AppCompatActivity() {
     private lateinit var timeSlotAdapter: TimeSlotAdapter
     private var selectedDate: String? = null
     private var selectedTimeSlot: TimeSlot? = null
+    private var stadiumName: String = ""
+    private var stadiumPrice: String = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityBookingBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        // Get stadium details from intent
+        stadiumName = intent.getStringExtra("stadium_name") ?: ""
+        stadiumPrice = intent.getStringExtra("stadium_price") ?: ""
 
         setupCalendarView()
         setupTimeSlots()
@@ -73,12 +80,41 @@ class BookingActivity : AppCompatActivity() {
                 return@setOnClickListener
             }
 
-            // Here you would typically make an API call to book the slot
-            Toast.makeText(
-                this,
-                "Booking for $selectedDate at ${selectedTimeSlot?.time}",
-                Toast.LENGTH_SHORT
-            ).show()
+            val sharedPreferences = getSharedPreferences("UserPreferences", MODE_PRIVATE)
+            val userName = sharedPreferences.getString("name", "") ?: ""
+
+            val reservation = Reservation(
+                stadiumName = stadiumName,
+                date = selectedDate!!,
+                time = selectedTimeSlot!!.time,
+                price = stadiumPrice,
+                userName = userName
+            )
+
+            saveReservation(reservation)
+            Toast.makeText(this, "Booking confirmed!", Toast.LENGTH_SHORT).show()
+            finish()
         }
+    }
+
+    private fun saveReservation(reservation: Reservation) {
+        val sharedPreferences = getSharedPreferences("Reservations", MODE_PRIVATE)
+        val reservationsSet = sharedPreferences.getStringSet("reservations", mutableSetOf())?.toMutableSet() ?: mutableSetOf()
+        
+        // Convert reservation to JSON string
+        val reservationJson = """
+            {
+                "id": "${reservation.id}",
+                "stadiumName": "${reservation.stadiumName}",
+                "date": "${reservation.date}",
+                "time": "${reservation.time}",
+                "price": "${reservation.price}",
+                "userName": "${reservation.userName}"
+            }
+        """.trimIndent()
+        
+        reservationsSet.add(reservationJson)
+        
+        sharedPreferences.edit().putStringSet("reservations", reservationsSet).apply()
     }
 } 
